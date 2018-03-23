@@ -2,6 +2,7 @@ __author__ = 'Connor'
 
 from random import *
 import time
+import math
 
 def bogo_sort(lst):
     r1, r2 = randint(0,len(lst)-1), randint(0,len(lst)-1)
@@ -22,11 +23,19 @@ def main():
     n = 1
     lst = sorted(unlst)
     startTime = time.clock()
-    while lst != bogo_sort(unlst):
-        n += 1
-        print(str(n))
-    endTime = time.clock()
-    print("Run", str(n), "passed after", str(endTime - startTime), "seconds!")
+    try:
+        for i in range(len(lst)*math.floor(math.log(len(lst, 2)))) :
+            n += 1
+            bogo_sort(unlst)
+            if lst == unlst :
+                break
+            print(str(n))
+        else :
+            raise Exception
+        endTime = time.clock()
+        print("Run", str(n), "passed after", str(endTime - startTime), "seconds!")
+    except Exception:
+        print("segmentation fault")
 
 if __name__ == "__main__":
     main()
